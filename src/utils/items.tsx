@@ -1,7 +1,8 @@
 import { notFound } from '@tanstack/react-router';
 import { createServerFn } from '@tanstack/react-start';
 import type { Item as ItemType } from '../types/Item';
-import fs from 'node:fs/promises';
+// import fs from 'node:fs/promises';
+import items from '../data/items.json' with { type: "json" };
 
 export const fetchItem = createServerFn({ method: 'POST' })
   .inputValidator((d: string) => d)
@@ -23,7 +24,8 @@ export const fetchItem = createServerFn({ method: 'POST' })
   });
 
 export const fetchItems = createServerFn().handler(async () => {
-  return JSON.parse(await fs.readFile('./data/items.json', 'utf-8'))
+  return items;
+  // return JSON.parse(await fs.readFile('./data/items.json', 'utf-8'))
   // console.info('Fetching items...');
   // const response = await fetch('http://localhost:3000/data/items.json');
   // if (!response.ok) {
